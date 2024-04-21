@@ -5,11 +5,9 @@
 #  
 # Description:
 #   main.py - entrypoint file
-#   auth.py - file with user authentication logic
-#   files.py - file with file upload/delete/etc logic
-#   userprofile.py - file with logic for user's profile management
-#   web.py - file with deploying web site logic   
-# 
+#   routes.py - route management
+#   db.py - user's creating,  SQLite3 integration
+#
 #
 # Author:
 #   Team «Мы»
