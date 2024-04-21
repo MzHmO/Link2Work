@@ -3,7 +3,6 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from db import Database
 import os
-import files
 
 app = Flask(__name__)
 app.secret_key = "l0l1T'sSecretKey!@xD"
