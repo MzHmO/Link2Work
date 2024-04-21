@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        Username: <input type="text" name="username" required>
+        Password: <input type="password" name="password" required>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
