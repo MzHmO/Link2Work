@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from db import Database
+from file_manager import All_app, download_file, delete_file, file_handling
 import os
 
 app = Flask(__name__)
@@ -10,10 +11,18 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'files')
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+All_app(app)
+app.add_url_rule('/download/<filename>', view_func=download_file)
+app.add_url_rule('/delete/<filename>', methods=['GET', 'POST'], view_func=delete_file)
+app.add_url_rule('/download/<filename>', view_func=download_file)
+app.add_url_rule('/delete/<filename>', methods=['GET', 'POST'], view_func=delete_file)
+app.add_url_rule('/files', methods=['GET', 'POST'], view_func=file_handling)
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return Database.get_user(user_id)
+
 
 @app.route('/')
 def home():
@@ -21,20 +30,22 @@ def home():
         return redirect(url_for('file_handling'))
     return redirect(url_for('login'))
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
+
         message, success = Database.register_user(username, password)
-        
+
         if not success:
             return render_template('register.html', error=message)
-        
+
         return redirect(url_for('login'))
-    
+
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -49,44 +60,13 @@ def login():
             flash('Invalid username or password')
     return render_template('login.html')
 
-@app.route('/files', methods=['GET', 'POST'])
-@login_required
-def file_handling():
-    if '_user_id' not in session:
-        return redirect(url_for('login'))
-    
-    user = Database.get_user(session['_user_id'])
-    user_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(user.id))
-    if not os.path.exists(user_folder):
-        os.makedirs(user_folder)
-    
-    if request.method == 'POST':
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(user_folder, filename))
-        return redirect(url_for('file_handling'))
-
-    files = os.listdir(user_folder)
-    return render_template('files.html', files=files, username=user.username)
-
-@app.route('/download/<filename>')
-@login_required
-def download_file(filename):
-    return send_from_directory(str(app.config['UPLOAD_FOLDER'] + "\\" + session['_user_id']), filename, as_attachment=True)
-
-@app.route('/delete/<filename>', methods=['GET', 'POST'])
-@login_required
-def delete_file(filename):
-    path = app.config['UPLOAD_FOLDER'] +  "\\" + session['_user_id']
-    os.remove(os.path.join(path, filename))
-    return redirect(url_for('file_handling'))
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 def deploy_web(debug, port):
     app.run(debug=debug, port=port)
