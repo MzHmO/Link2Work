@@ -7,6 +7,13 @@
 <body>
     <div class="login-container">
         <h2>Вход</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="" method="post">
             <input type="username" name="username" placeholder="Имя пользователя" required>
             <input type="password" name="password" placeholder="Пароль" required>
