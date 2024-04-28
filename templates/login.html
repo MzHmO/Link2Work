@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Вход в систему</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Вход</h2>
-        <form action="" method="post">
-            <input type="username" name="username" placeholder="Имя пользователя" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
-        <button><a href="/register">Регистрация</a></button>
+    <div class="wrapper">
+        <main>
+            <section class="login">
+                <div class="container">
+                    <div class="login__inner">
+                        <a href="settings.html" class="login__logo">
+                            <img src="/img/box.png" alt="logo">
+                        </a>
+                        <h1 class="login__title">Авторизация</h1>
+                        <form class="login__form">
+                            <input type="text" class="login__input" placeholder="Логин">
+                            <input type="password" class="login__input" placeholder="Пароль">
+                        </form>
+                        <div class="login__links">
+                            <a href="files" class="login__link">Войти</a>
+                            <a href="register" class="login__link">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>

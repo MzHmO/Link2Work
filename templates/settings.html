@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>Настройки</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Document</title>
 </head>
 <body>
-  <h1>Настройки</h1>
-  <form>
-    <input type="submit" value="Сменить пароль">
-    <input type="submit" value="Сменить имя">
-  </form>
+    <div class="wrapper">
+        <main>
+            <section class="login">
+                <div class="container">
+                    <div class="login__inner">
+                        <a href="index.html" class="login__logo">
+                            <img src="/img/box.png" alt="logo">
+                        </a>
+                        <h1 class="login__title">Настройки</h1>
+                        <form class="login__form">
+                            <input type="text" class="login__input" placeholder="Новый логин">
+                            <input type="password" class="login__input" placeholder="Новый пароль">
+                        </form>
+                        <div class="login__links">
+                            <a href="login.html" class="login__link">Отмена</a>
+                            <a href="login.html" class="login__link">Сменить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

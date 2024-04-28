@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Регистрация</title>
 </head>
 <body>
-    <h1>Регистрация</h1>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="post">
-        Имя пользователя: <input type="text" name="username" required>
-        Пароль: <input type="password" name="password" required>
-        <input type="submit" value="Регистрация">
-    </form>
-    <button><a href="/login">Логин</a></button>
+    <div class="wrapper">
+        <main>
+            <section class="register">
+                <div class="container">
+                    <div class="register__inner">
+                        <a href="account.html" class="register__logo">
+                            <img src="/img/box.png" alt="logo">
+                        </a>
+                        <h1 class="register__title">Регистрация</h1>
+                        <form class="register__form">
+                            <input class="register__input" type="text" placeholder="Введите логин" required>
+                            <input class="register__input" type="password" placeholder="Введите пароль" required>
+                            <input class="register__input" type="text" placeholder="Введите имя">
+                            <input class="register__input" type="text" placeholder="Введите фамилию">
+                            <input class="register__input" type="text" placeholder="Введите отчество">
+                            <input class="register__input" type="date" placeholder="Введите дату рождения">
+                            <div class="register__button">
+                                <button class="register__btn" type="submit">Зарегистрироваться</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
