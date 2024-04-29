@@ -68,5 +68,9 @@ def logout():
     return redirect(url_for('home'))
 
 
+@app.route('/settings')
+def settings():
+    render_template('settings.html')
+
 def deploy_web(debug, port):
     app.run(debug=debug, port=port)

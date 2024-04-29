@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Регистрация</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/reset.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Регистрация</h1>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="post">
-        Имя пользователя: <input type="text" name="username" required>
-        Пароль: <input type="password" name="password" required>
-        <input type="submit" value="Регистрация">
-    </form>
-    <button><a href="/login">Логин</a></button>
+    <div class="wrapper">
+        <main>
+            <section class="register">
+                <div class="container">
+                    <div class="register__inner">
+                        <img src="/img/box.png" alt="logo">
+                        <h1 class="register__title">Регистрация</h1>
+                        {% if error %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endif %}
+                        <form class="register__form" method="post">
+                            <input class="register__input" type="text" name="username" placeholder="Введите логин" required>
+                            <input class="register__input" type="password" name="password" placeholder="Введите пароль" required>
+                            <input class="register__input" type="text" placeholder="Введите имя">
+                            <input class="register__input" type="text" placeholder="Введите фамилию">
+                            <input class="register__input" type="text" placeholder="Введите отчество">
+                            <input class="register__input" type="date" placeholder="Введите дату рождения">
+                            <input class="register__input" type="text" placeholder="Введите e-mail">
+                        </form>
+                        <div class="register__button">
+                            <button class="register__btn"><a href="/login">Зарегистрироваться</a></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

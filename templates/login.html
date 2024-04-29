@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Вход в систему</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/reset.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Вход</h2>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p style="color: red;">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <form action="" method="post">
-            <input type="username" name="username" placeholder="Имя пользователя" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
-        <button><a href="/register">Регистрация</a></button>
-    </div>
+<div class="wrapper">
+    <main>
+        <section class="login">
+                <div class="container">
+                    <div class="login__inner">
+                        <img src="img/box.png">
+                    <h1 class="login__title">Авторизация</h1>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p style="color: red;">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form class="login__form" action="" method="post">
+                        <input class="login__input" type="username" name="username" placeholder="Имя пользователя" required>
+                        <input class="login__input" type="password" name="password" placeholder="Пароль" required>
+                    </form>
+                        <div class="login__links">
+                            <button class="login__link" type="submit">Войти</button>
+                            <button class="login__link" ><a href="/register">Регистрация</a></button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+</div>
 </body>
 </html>
