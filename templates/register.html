@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <title>Регистрация</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Регистрация</title>
+    <link rel="stylesheet" href="/static/reset.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -14,20 +13,19 @@
             <section class="register">
                 <div class="container">
                     <div class="register__inner">
-                        <a href="account.html" class="register__logo">
-                            <img src="/img/box.png" alt="logo">
-                        </a>
+                        <img src="/img/box.png" alt="logo">
                         <h1 class="register__title">Регистрация</h1>
-                        <form class="register__form">
-                            <input class="register__input" type="text" placeholder="Введите логин" required>
-                            <input class="register__input" type="password" placeholder="Введите пароль" required>
-                            <input class="register__input" type="text" placeholder="Введите имя">
-                            <input class="register__input" type="text" placeholder="Введите фамилию">
-                            <input class="register__input" type="text" placeholder="Введите отчество">
-                            <input class="register__input" type="date" placeholder="Введите дату рождения">
-                            <div class="register__button">
-                                <button class="register__btn" type="submit">Зарегистрироваться</button>
-                            </div>
+                        {% if error %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endif %}
+                        <form class="register__form" method="post">
+                            <input class="register__input" type="text" name="username" placeholder="Введите логин" required>
+                            <input class="register__input" type="password" name="password" placeholder="Введите пароль" required>
+                            <input class="register__input" type="text" name="email" placeholder="Введите e-mail" required>
+                        <div class="register__button">
+                            <button class="register__btn" type="submit">Зарегистрироваться</button>
+                            <button><a href="/login">Войти</a> </button>
+                        </div>
                         </form>
                     </div>
                 </div>

@@ -71,12 +71,12 @@ class Database:
         cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
 
         user = cursor.fetchone()
-        
+
         if user:
             conn.close()
             return 'User already exists', False
 
-        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", 
+        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)",
                    (username, generate_password_hash(password)))
 
         conn.commit()

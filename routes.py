@@ -36,7 +36,6 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         message, success = Database.register_user(username, password)
 
         if not success:

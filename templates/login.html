@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <title>Вход в систему</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/static/reset.css">
+    <link rel="stylesheet" href="/static/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Вход в систему</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="wrapper">
-        <main>
-            <section class="login">
+<div class="wrapper">
+    <main>
+        <section class="login">
                 <div class="container">
                     <div class="login__inner">
-                        <a href="settings.html" class="login__logo">
-                            <img src="/img/box.png" alt="logo">
-                        </a>
-                        <h1 class="login__title">Авторизация</h1>
-                        <form class="login__form">
-                            <input type="text" class="login__input" placeholder="Логин">
-                            <input type="password" class="login__input" placeholder="Пароль">
-                        </form>
+                        <img src="img/box.png">
+                    <h1 class="login__title">Авторизация</h1>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p style="color: red;">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form class="login__form" action="" method="post">
+                        <input class="login__input" type="username" name="username" placeholder="Имя пользователя" required>
+                        <input class="login__input" type="password" name="password" placeholder="Пароль" required>
                         <div class="login__links">
-                            <a href="files" class="login__link">Войти</a>
-                            <a href="register" class="login__link">Зарегистрироваться</a>
+                            <button class="login__link" type="submit">Войти</button>
+                            <button class="login__link" ><a href="/register">Регистрация</a></button>
                         </div>
+                        </form>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
+        </section>
+    </main>
+</div>
 </body>
 </html>
