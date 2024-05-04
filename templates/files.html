@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>{{ username }}'s Files</title>
-</head>
+  <head>
+    <title>{{username}}'s files</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='files.css') }}">
+  </head>
 <body>
-{% if error %}
-<p style="color: red;">{{ error }}</p>
-{% endif %}
-<h1>{{ username }}'s Загруженные файлы</h1>
-<ul>
-  {% for file in files %}
-  <li>
-    {{ file }}
-    <button><a href="{{ url_for('download_file', filename=file) }}">Скачать</a></button>
-    <form action="{{ url_for('delete_file', filename=file) }}" method="post">
-      <button type="submit">Удалить</button>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>We</h1>
+    </div>
+    <button>Загрузить</button>
+    <button>Создать проект</button>
+    <!-- Кнопки на другие проекты -->
+  </div>
+
+  <div class="main-content">
+    <h2>Проект 1</h2>
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+    <div class="files-list">
+      {% for file in files %}
+      <div class="file-item">
+        <img src="file-icon.png" alt="file">
+        {{ file }}
+        <button><a href="{{ url_for('download_file', filename=file) }}">Скачать</a></button>
+        <form action="{{ url_for('delete_file', filename=file) }}" method="post">
+          <button type="submit">Удалить</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h2>Загрузить новые файлы</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <input type="submit" value="Загрузить">
     </form>
-  </li>
-  {% endfor %}
-</ul>
-<h2>Загрузить новые файлы</h2>
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="file">
-  <input type="submit" value="Загрузить">
-</form>
-<button><a href="{{ url_for('logout') }}">Выйти</a></button>
-<button><a href="Personal_Page">Личный кабинет</a></button>
+  </div>
+
+  <button><a href="{{ url_for('logout') }}">Выйти</a></button>
+  <button><a href="Personal_Page">Личный кабинет</a></button>
 </body>
 </html>
