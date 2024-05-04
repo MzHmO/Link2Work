@@ -15,8 +15,8 @@
 
 import logging
 import argparse
-from routes import deploy_web
-from db import Database
+from backend.routes import deploy_web
+from backend.database import Database
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -39,5 +39,5 @@ if __name__ == "__main__":
         port = options.port
 
     Database.setup_db()
-    deploy_web(debug=options.debug, port=port)
-    
+
+    deploy_web()

@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ username }}'s Files</title>
+  <title>{{ username }}'s Files</title>
 </head>
 <body>
-    <h1>{{ username }}'s Загруженные файлы</h1>
-    <ul>
-    {% for file in files %}
-        <li>
-            {{ file }}
-            <button><a href="{{ url_for('download_file', filename=file) }}">Скачать</a></button>
-            <form action="{{ url_for('delete_file', filename=file) }}" method="post">
-                <button type="submit">Удалить</button>
-            </form>
-        </li>
-    {% endfor %}
-    </ul>
-    <h2>Загрузить новые файлы</h2>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Загрузить">
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+<h1>{{ username }}'s Загруженные файлы</h1>
+<ul>
+  {% for file in files %}
+  <li>
+    {{ file }}
+    <button><a href="{{ url_for('download_file', filename=file) }}">Скачать</a></button>
+    <form action="{{ url_for('delete_file', filename=file) }}" method="post">
+      <button type="submit">Удалить</button>
     </form>
-    <button><a href="{{ url_for('logout') }}">Выйти</a></button>
-    <button><a href="Personal_Page">Личный кабинет</a></button>
+  </li>
+  {% endfor %}
+</ul>
+<h2>Загрузить новые файлы</h2>
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <input type="submit" value="Загрузить">
+</form>
+<button><a href="{{ url_for('logout') }}">Выйти</a></button>
+<button><a href="Personal_Page">Личный кабинет</a></button>
 </body>
 </html>
