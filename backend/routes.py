@@ -8,6 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required, 
 
 # DEPLOY CONFIG
 from config import app
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -23,11 +24,13 @@ app.add_url_rule('/delete/<filename>', methods=['GET', 'POST'], view_func=delete
 def load_user(user_id):
     return Database.get_user_by_id(user_id=user_id)
 
+
 @app.route('/')
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('file_handling'))
     return redirect(url_for('login'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -40,14 +43,16 @@ def login():
             return redirect(url_for('file_handling'))
         else:
             flash('Неверное имя пользователя или пароль')
-    
+
     return render_template('login.html', form=form)
+
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -69,5 +74,5 @@ def register():
 
 
 # ENTRYPOINT
-def deploy_web(host="127.0.0.1", port=80, debug=False):
+def deploy_web(host="127.0.0.1", port=8000, debug=False):
     app.run(host=host, port=port, debug=debug)
