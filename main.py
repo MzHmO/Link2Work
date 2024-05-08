@@ -37,4 +37,5 @@ if __name__ == "__main__":
         logging.basicConfig(level=logging.CRITICAL, format='%(asctime)s - %(levelname)s - %(message)s')
 
     Database.setup_db()
+
     deploy_web(host=options.host, port=options.port, debug=options.debug)

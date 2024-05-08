@@ -73,6 +73,99 @@ def register():
     return render_template('register.html', form=form, error=error)
 
 
+@app.route('/Personal_Page')
+def Profile():
+    return render_template('Personal_Page.html')
+
+
 # ENTRYPOINT
-def deploy_web(host, port, debug):
+def deploy_web(host="127.0.0.1", port=80, debug=False):
     app.run(host=host, port=port, debug=debug)
+
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+
+def update_login(new_login):
+    if new_login != '' and not new_login_exists(new_login):
+        print("Login updated to:", new_login)
+        return True
+    return False
+
+
+def update_password(old_password, new_password, confirm_new_password):
+    user_password_hash = get_user_password()
+    if not check_password_hash(user_password_hash, old_password):
+        flash('Old password is incorrect.')
+        return False
+
+    if new_password != confirm_new_password:
+        flash('New password does not match confirmation.')
+        return False
+
+    update_password_hash = generate_password_hash(new_password)
+    update_user_password(update_password_hash)
+    return True
+
+
+def new_login_exists(new_login):
+    return False
+
+
+def get_user_password():
+    return 'existing_hashed_password'
+
+
+def check_password_hash(stored_password_hash, provided_password):
+    # Проверка пароля
+    return True
+
+
+def generate_password_hash(password):
+    # Генерация хеша пароля
+    return 'new_hashed_password'
+
+
+def update_user_password(new_password_hash):
+    # Обновление пароля пользователя
+    pass
+
+
+@app.route('/change_settings', methods=['POST'])
+def change_settings():
+    new_login = request.form['new_login']
+    old_password = request.form['old_password']
+    new_password = request.form['new_password']
+    confirm_new_password = request.form['confirm_new_password']
+
+    user = current_user
+    updated_login = validate_and_update_login(user.id, new_login)
+    updated_password = validate_and_update_password(user, old_password, new_password, confirm_new_password)
+
+    if updated_login and updated_password:
+        flash('Настройки успешно обновлены.')
+    else:
+        flash('Не удалось обновить логин или пароль.')
+
+    return redirect(url_for('personal_page'))
+
+
+def validate_and_update_login(user_id, new_login):
+    if new_login_exists(new_login):
+        flash('Этот логин уже используется.')
+        return False
+    return Database.update_user_login(user_id, new_login)
+
+
+def validate_and_update_password(user, old_password, new_password, confirm_new_password):
+    if not user.check_password(old_password):
+        flash('Старый пароль неверен.')
+        return False
+    if new_password != confirm_new_password:
+        flash('Новый пароль не совпадает с подтверждением.')
+        return False
+    if Database.update_user_password(user.id, new_password):
+        return True
+    return False

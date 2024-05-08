@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+</head>
+<body>
+
+<h1>Настройки</h1>
+
+<form action="/change_password" method="post">
+    <h2>Смена логина</h2>
+    <label for="new_login">Новый логин:</label>
+    <input type="text" id="new_login" name="new_login" required><br><br>
+
+    <h2>Смена пароля</h2>
+    <label for="old_password">Старый пароль:</label>
+    <input type="password" id="old_password" name="old_password" required><br><br>
+
+    <label for="new_password">Новый пароль:</label>
+    <input type="password" id="new_password" name="new_password" required><br><br>
+
+    <label for="confirm_new_password">Потвердить новый пароль:</label>
+    <input type="password" id="confirm_new_password" name="confirm_new_password" required><br><br>
+
+    <button type="submit">Сохранить</button>
+    <button type="button" onclick="window.location.href='/Personal_Page';">Назад</button>
+</form>
+
+</body>
+</html>
