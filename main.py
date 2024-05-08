@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     options = parser.parse_args()
 
-    if options.debug is True:
+    if options.debug:
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     else:
         logging.basicConfig(level=logging.CRITICAL, format='%(asctime)s - %(levelname)s - %(message)s')
