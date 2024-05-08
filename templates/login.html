@@ -1,43 +1,61 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
+
 <head>
-    <title>Вход в систему</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/reset.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Вход в систему</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
-<body>
-<div class="wrapper">
-    <main>
-        <section class="login">
-                <div class="container">
-                    <div class="login__inner">
-                        <img src="img/box.png">
-                    <h1 class="login__title">Авторизация</h1>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <p style="color: red;">{{ message }}</p>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    <form class="login__form" action="" method="post">
-                        <input class="login__input" type="username" name="username" placeholder="Имя пользователя" required>
-                        <input class="login__input" type="password" name="password" placeholder="Пароль" required>
-                        <div class="login__links">
-                            <button class="login__link" type="submit">Войти</button>
-                            <button class="login__link" ><a href="/register">Регистрация</a></button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-        </section>
-    </main>
-</div>
+
+<body style="background-image: url({{ url_for('static', filename='bg.png') }});"
+  class="text-[#080808] bg-center bg-cover">
+  <div class="w-screen h-screen justify-center items-center flex">
+    <div
+      class="h-[45rem] w-[60rem] bg-white rounded-lg border-[1px] border-[#83A2CE] justify-center grid grid-rows-[15%_10%_auto_75%] py-4">
+      <div class="flex justify-center">
+        <img class="" src="{{ url_for('static', filename='welogo.png' ) }}" alt="">
+      </div>
+      <div class="flex justify-center text-5xl font-light">
+        <h1>Вход в систему</h1>
+      </div>
+      <div class="grid justify-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+      <div class="grid items-center">
+        <form method="post">
+          <div class="grid gap-4 items-center justify-center">
+            <div class="grid w-full h-20 bg-[#E6EFF9] rounded-lg px-4 items-center">
+              <p>
+                {{ form.username(size=70, placeholder="Имя") }}
+              </p>
+            </div>
+            <div class="grid w-full h-20 bg-[#E6EFF9] rounded-lg px-4 items-center">
+              <p>
+                {{ form.password(size=70, placeholder="Пароль") }}
+              </p>
+            </div>
+
+            <div class="flex gap-x-4 justify-center items-center mt-20">
+              <div
+                class="text-white w-1/2 h-10 bg-[#334664] hover:bg-[#597197] rounded-lg grid items-center justify-center cursor-pointer">
+                {{ form.submit(id="submit-btn") }}
+              </div>
+              <div
+                class="w-1/2 h-10 bg-[#CEDEED] hover:bg-[#b7c9d8] rounded-lg grid items-center justify-center cursor-pointer">
+                <button><a href="/register">Зарегистрироваться</a></button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

@@ -15,8 +15,8 @@
 
 import logging
 import argparse
-from routes import deploy_web
-from db import Database
+from backend.routes import deploy_web
+from backend.database import Database
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -27,6 +27,7 @@ if __name__ == "__main__":
                         in one self-hosted solution")
     parser.add_argument("-debug", action="store_true", help='Turn Debug output ON')
     parser.add_argument("-port", action="store", help="From 1 to 65536 port value on which web server will be started", default=80)
+    parser.add_argument("-host", action="store", help="IP of network interface on which deploy web app on", default="127.0.0.1")
 
     options = parser.parse_args()
 
@@ -34,10 +35,6 @@ if __name__ == "__main__":
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     else:
         logging.basicConfig(level=logging.CRITICAL, format='%(asctime)s - %(levelname)s - %(message)s')
-    
-    if options.port is not None:
-        port = options.port
 
     Database.setup_db()
-    deploy_web(debug=options.debug, port=port)
-    
+    deploy_web(host=options.host, port=options.port, debug=options.debug)
