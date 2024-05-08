@@ -74,5 +74,5 @@ def register():
 
 
 # ENTRYPOINT
-def deploy_web(host="127.0.0.1", port=8000, debug=False):
+def deploy_web(host, port, debug):
     app.run(host=host, port=port, debug=debug)

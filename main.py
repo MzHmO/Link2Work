@@ -26,7 +26,7 @@ if __name__ == "__main__":
                         for managing users's achievements and awards \
                         in one self-hosted solution")
     parser.add_argument("-debug", action="store_true", help='Turn Debug output ON')
-    parser.add_argument("-port", action="store", help="From 1 to 65536 port value on which web server will be started", default=8000)
+    parser.add_argument("-port", action="store", help="From 1 to 65536 port value on which web server will be started", default=80)
     parser.add_argument("-host", action="store", help="IP of network interface on which deploy web app on", default="127.0.0.1")
 
     options = parser.parse_args()
